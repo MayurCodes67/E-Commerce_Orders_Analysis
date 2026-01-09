@@ -74,11 +74,3 @@ Total tests: **~60**
 - Column-level tests and descriptions are visible in the docs UI.
 
 ---
-
-## How to Run
-
-dbt seed
-dbt run
-dbt test
-dbt docs generate
-dbt docs serve
