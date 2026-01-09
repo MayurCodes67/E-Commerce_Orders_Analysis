@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: weekly_order_revenue_rolling_4w
+    description: >
+      Calculating the rolling avg and standard deviation of previous 4 weeks total weekly revenue.
+      Used AVG(weekly_revenue) OVER(PARTITION BY order_id ORDER BY week_start ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING).
+      Used STDDEV_POP(weekly_revenue) OVER(PARTITION BY order_id ORDER BY week_start ROWS BETWEEN 4 PRECEDING AND 1 PRECEDING).
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: week_start
+        tests:
+          - not_null
+
+      - name: weekly_revenue
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: rolling_four_weeks_prev
+        description: >
+          Rolling AVG should be or more than 0.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: stddev_four_weeks_prev
+        description: >
+          Standard DEV should be or more than 0.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"           

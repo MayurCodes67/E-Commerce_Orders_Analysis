@@ -1,0 +1,14 @@
+
+    
+    
+    
+    create table "ecommerce_orders_analytics"."analytics_raw"."orders" ("order_id" integer,"customer_id" integer,"order_date" date,"order_status" text,"order_amount" float8,"payment_method" text)
+  ;
+    -- dbt seed --
+    
+          insert into "ecommerce_orders_analytics"."analytics_raw"."orders" ("order_id", "customer_id", "order_date", "order_status", "order_amount", "payment_method") values
+          (%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s),(%s,%s,%s,%s,%s,%s)
+      
+
+;
+  

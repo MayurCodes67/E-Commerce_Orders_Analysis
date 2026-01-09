@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: wow_order_revenue_percentage_growth
+    description: >
+      Calculating the GP (Growth Percentage) of revenue.
+      Used GP = (current_weekly_revenue - Previous_weekly_revenue / Previous_weekly_revenue) * 100.
+    tests:
+      - wow_order_revenue_percentage_growth_formula_correctness
+      - wow_order_revenue_percentage_growth_zero_denominator_handling
+
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+
+      - name: week_start
+        tests:
+          - not_null
+
+      - name: weekly_revenue
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: prev_week_revenue
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
+
+      - name: week_over_week_percentage_growth
+        description: >
+          GP should be or more than 0.
+        tests:
+          - dbt_utils.expression_is_true:
+              expression: ">= 0"
